@@ -599,14 +599,20 @@ Je l'enregistre ? <b>oui / non</b>`;
             <header class="px-4 py-3 bg-gradient-to-r from-slate-900 to-indigo-700 text-white flex items-center justify-between">
                 <div class="flex items-center gap-2"><i class="fa-solid fa-robot"></i>
                     <div><div class="font-bold text-sm">Jarvis</div><div class="text-[10px] text-indigo-200">Assistant du coordonnateur · 100 % local</div></div></div>
-                <button id="jarvis-close" aria-label="Fermer" class="text-white/70 hover:text-white p-1"><i class="fa-solid fa-xmark text-base"></i></button>
+                <div class="flex items-center gap-2">
+                    <button id="jarvis-voice-toggle" title="Activer/Désactiver la voix parlante de Jarvis" aria-label="Voix parlante" class="text-white/80 hover:text-white p-1 rounded transition text-xs flex items-center gap-1 bg-white/10 px-2 py-0.5">
+                        <i class="fa-solid fa-volume-high" id="jarvis-voice-icon"></i>
+                        <span id="jarvis-voice-status" class="text-[10px] font-semibold">Voix ON</span>
+                    </button>
+                    <button id="jarvis-close" aria-label="Fermer" class="text-white/70 hover:text-white p-1"><i class="fa-solid fa-xmark text-base"></i></button>
+                </div>
             </header>
             <div id="jarvis-log" class="flex-1 overflow-y-auto p-3 space-y-2 bg-slate-50 text-xs" aria-live="polite"></div>
             <div id="jarvis-chips" class="px-3 pt-2 flex flex-wrap gap-1.5 bg-white max-h-[90px] overflow-y-auto"></div>
             <form id="jarvis-form" class="p-3 flex items-center gap-2 bg-white border-t border-slate-100">
-                <button type="button" id="jarvis-mic" title="Dicter (Chrome/Edge)" aria-label="Dicter" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600"><i class="fa-solid fa-microphone"></i></button>
-                <input id="jarvis-input" autocomplete="off" placeholder="Ex : ajoute Ibrahima le 9 octobre sur la méthodo…" class="flex-1 text-xs border border-slate-300 rounded-full px-3 py-2 outline-none focus:border-indigo-500">
-                <button type="submit" aria-label="Envoyer" class="w-9 h-9 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white"><i class="fa-solid fa-paper-plane"></i></button>
+                <button type="button" id="jarvis-mic" title="Dicter (Chrome/Edge/Safari)" aria-label="Dicter" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 transition flex items-center justify-center shrink-0"><i class="fa-solid fa-microphone"></i></button>
+                <input id="jarvis-input" autocomplete="off" placeholder="Parlez ou écrivez ici…" class="flex-1 text-xs border border-slate-300 rounded-full px-3 py-2 outline-none focus:border-indigo-500">
+                <button type="submit" aria-label="Envoyer" class="w-9 h-9 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white transition flex items-center justify-center shrink-0"><i class="fa-solid fa-paper-plane"></i></button>
             </form>`;
         document.body.append(btn, panel);
 
@@ -625,7 +631,8 @@ Je l'enregistre ? <b>oui / non</b>`;
         });
 
         setupVoice();
-        bubble("bot", `Bonjour 👋 Je suis <b>Jarvis</b>. Dites-moi ce que vous voulez faire, à l'écrit ou au micro.<br>Exemple : <b>« Ajoute Ibrahima le 9 octobre sur la méthodologie de projet »</b>`);
+        setupSpeechSynthesis();
+        bubble("bot", `Bonjour 👋 Je suis <b>Jarvis</b>, votre copilote vocal et textuel. Dites-moi ce que vous voulez faire à l'oral ou à l'écrit.<br>Exemple : <b>« Ajoute Ibrahima le 9 octobre sur la méthodologie de projet »</b>`);
     }
 
     function toggle() {
@@ -646,6 +653,73 @@ Je l'enregistre ? <b>oui / non</b>`;
         return d;
     }
 
+    // ================================================================
+    // SYNTHÈSE VOCALE (JARVIS PARLE À L'ORAL)
+    // ================================================================
+    let voiceEnabled = true;
+
+    function setupSpeechSynthesis() {
+        const toggleBtn = document.getElementById("jarvis-voice-toggle");
+        if (!("speechSynthesis" in window)) {
+            if (toggleBtn) toggleBtn.style.display = "none";
+            return;
+        }
+
+        toggleBtn.onclick = () => {
+            voiceEnabled = !voiceEnabled;
+            const icon = document.getElementById("jarvis-voice-icon");
+            const status = document.getElementById("jarvis-voice-status");
+            if (voiceEnabled) {
+                icon.className = "fa-solid fa-volume-high";
+                status.innerText = "Voix ON";
+                toggleBtn.classList.remove("opacity-50");
+                speak("Synthèse vocale activée.");
+            } else {
+                icon.className = "fa-solid fa-volume-xmark";
+                status.innerText = "Voix OFF";
+                toggleBtn.classList.add("opacity-50");
+                window.speechSynthesis.cancel();
+            }
+        };
+    }
+
+    function extractPlainText(html) {
+        const tmp = document.createElement("div");
+        tmp.innerHTML = html;
+        // Supprimer balises et formater pour lecture orale naturelle
+        let text = tmp.textContent || tmp.innerText || "";
+        text = text.replace(/<[^>]*>?/gm, "")
+                   .replace(/https?:\/\/\S+/g, "")
+                   .replace(/[\n\r]+/g, ". ")
+                   .replace(/\s{2,}/g, " ")
+                   .trim();
+        return text;
+    }
+
+    function speak(text) {
+        if (!voiceEnabled || !("speechSynthesis" in window)) return;
+        try {
+            window.speechSynthesis.cancel(); // Stoppe toute parole en cours
+            const cleanText = extractPlainText(text);
+            if (!cleanText) return;
+
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.lang = "fr-FR";
+            utterance.rate = 1.05; // Rythme naturel et dynamique
+            utterance.pitch = 1.0;
+
+            // Choisir une voix française naturelle si disponible
+            const voices = window.speechSynthesis.getVoices();
+            const frVoice = voices.find(v => v.lang.startsWith("fr") && (v.name.includes("Thomas") || v.name.includes("Google") || v.name.includes("Natural") || v.name.includes("Hortense") || v.name.includes("Julie"))) 
+                          || voices.find(v => v.lang.startsWith("fr"));
+            if (frVoice) utterance.voice = frVoice;
+
+            window.speechSynthesis.speak(utterance);
+        } catch (err) {
+            console.warn("Erreur synthèse vocale :", err);
+        }
+    }
+
     async function send() {
         const input = document.getElementById("jarvis-input");
         const text = input.value.trim();
@@ -653,22 +727,36 @@ Je l'enregistre ? <b>oui / non</b>`;
         input.value = "";
         bubble("user", esc(text));
         const wait = bubble("bot", '<i class="fa-solid fa-ellipsis fa-fade"></i>');
-        try { wait.innerHTML = await handle(text); }
-        catch (e) { wait.innerHTML = `❌ Erreur : ${esc(e.message)}. Le serveur local est-il démarré ?`; }
+        try { 
+            const responseHtml = await handle(text);
+            wait.innerHTML = responseHtml;
+            speak(responseHtml);
+        }
+        catch (e) { 
+            const errHtml = `❌ Erreur : ${esc(e.message)}. Le serveur local est-il démarré ?`;
+            wait.innerHTML = errHtml;
+            speak(errHtml);
+        }
         document.getElementById("jarvis-log").scrollTop = 1e9;
     }
 
     function setupVoice() {
         const mic = document.getElementById("jarvis-mic");
         const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-        if (!SR) { mic.disabled = true; mic.title = "Dictée non disponible sur ce navigateur (utilisez Chrome ou Edge)"; mic.classList.add("opacity-40"); return; }
+        if (!SR) { mic.disabled = true; mic.title = "Dictée non disponible sur ce navigateur (utilisez Chrome, Edge ou Safari)"; mic.classList.add("opacity-40"); return; }
         const rec = new SR(); rec.lang = "fr-FR"; rec.interimResults = false;
-        rec.onresult = e => { document.getElementById("jarvis-input").value = e.results[0][0].transcript; send(); };
+        rec.onresult = e => { 
+            document.getElementById("jarvis-input").value = e.results[0][0].transcript; 
+            send(); 
+        };
         rec.onend = () => mic.classList.remove("bg-rose-500", "text-white");
-        mic.onclick = () => { mic.classList.add("bg-rose-500", "text-white"); rec.start(); };
+        mic.onclick = () => { 
+            mic.classList.add("bg-rose-500", "text-white"); 
+            rec.start(); 
+        };
     }
 
     // Exposé pour tests console : JarvisEngine.handle("aide")
-    window.JarvisEngine = { handle, parseDate, parseTheme, INTENTS, CHECKLISTS, CONFIG };
+    window.JarvisEngine = { handle, parseDate, parseTheme, INTENTS, CHECKLISTS, CONFIG, speak };
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", buildUI); else buildUI();
 })();

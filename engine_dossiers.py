@@ -143,36 +143,36 @@ def generate_habilitation_html(diplome_code):
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dossier d'Habilitation - {ref['code_diplome']} - {org.get('nom')}</title>
         <style>
-            @page { size: A4; margin: 18mm 15mm; }
-            body { font-family: 'Segoe UI', Arial, sans-serif; color: #1e293b; line-height: 1.5; font-size: 13px; background: #fff; margin: 0; padding: 25px; }
-            .header-box { border-bottom: 3px solid #0284c7; padding-bottom: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; }
-            .of-title { font-size: 16px; font-weight: bold; color: #0369a1; text-transform: uppercase; }
-            .of-sub { font-size: 11px; color: #64748b; }
-            .badge-qualiopi { background: #ecfdf5; border: 1px solid #10b981; color: #047857; padding: 4px 10px; border-radius: 6px; font-weight: bold; font-size: 11px; display: inline-block; }
-            .badge-rncp { background: #eff6ff; border: 1px solid #3b82f6; color: #1d4ed8; padding: 4px 10px; border-radius: 6px; font-weight: bold; font-size: 11px; display: inline-block; }
-            h1 { font-size: 22px; color: #0f172a; margin: 20px 0 10px 0; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }
-            .subtitle { text-align: center; color: #475569; font-size: 14px; margin-bottom: 30px; font-weight: 500; }
-            h2 { font-size: 15px; color: #0284c7; border-left: 4px solid #0284c7; padding-left: 10px; margin-top: 25px; margin-bottom: 12px; text-transform: uppercase; }
-            h3 { font-size: 13px; color: #334155; margin-top: 15px; margin-bottom: 8px; }
-            p, li { text-align: justify; }
-            table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 12px; }
-            th, td { border: 1px solid #cbd5e1; padding: 8px 10px; text-align: left; vertical-align: top; }
-            th { background: #f8fafc; color: #1e293b; font-weight: 600; }
-            .highlight-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 12px 16px; margin: 15px 0; overflow-x: auto; }
-            .page-break { page-break-after: always; }
-            .sign-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; }
-            .sign-box { border: 1px dashed #94a3b8; padding: 15px; border-radius: 6px; min-height: 90px; }
-            .no-print { text-align: right; margin-bottom: 20px; }
-            .btn-print { background: #0284c7; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; }
-            .btn-print:hover { background: #0369a1; }
-            @media (max-width: 768px) {
-                body { padding: 12px; font-size: 12px; }
-                .sign-grid { grid-template-columns: 1fr; gap: 15px; }
-                table { display: block; overflow-x: auto; width: 100%; }
-                h1 { font-size: 18px; }
-                .header-box { flex-direction: column; }
-            }
-            @media print { .no-print { display: none !important; } body { padding: 0; } }
+            @page {{ size: A4; margin: 18mm 15mm; }}
+            body {{ font-family: 'Segoe UI', Arial, sans-serif; color: #1e293b; line-height: 1.5; font-size: 13px; background: #fff; margin: 0; padding: 25px; }}
+            .header-box {{ border-bottom: 3px solid #0284c7; padding-bottom: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; }}
+            .of-title {{ font-size: 16px; font-weight: bold; color: #0369a1; text-transform: uppercase; }}
+            .of-sub {{ font-size: 11px; color: #64748b; }}
+            .badge-qualiopi {{ background: #ecfdf5; border: 1px solid #10b981; color: #047857; padding: 4px 10px; border-radius: 6px; font-weight: bold; font-size: 11px; display: inline-block; }}
+            .badge-rncp {{ background: #eff6ff; border: 1px solid #3b82f6; color: #1d4ed8; padding: 4px 10px; border-radius: 6px; font-weight: bold; font-size: 11px; display: inline-block; }}
+            h1 {{ font-size: 22px; color: #0f172a; margin: 20px 0 10px 0; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }}
+            .subtitle {{ text-align: center; color: #475569; font-size: 14px; margin-bottom: 30px; font-weight: 500; }}
+            h2 {{ font-size: 15px; color: #0284c7; border-left: 4px solid #0284c7; padding-left: 10px; margin-top: 25px; margin-bottom: 12px; text-transform: uppercase; }}
+            h3 {{ font-size: 13px; color: #334155; margin-top: 15px; margin-bottom: 8px; }}
+            p, li {{ text-align: justify; }}
+            table {{ width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 12px; }}
+            th, td {{ border: 1px solid #cbd5e1; padding: 8px 10px; text-align: left; vertical-align: top; }}
+            th {{ background: #f8fafc; color: #1e293b; font-weight: 600; }}
+            .highlight-box {{ background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 12px 16px; margin: 15px 0; overflow-x: auto; }}
+            .page-break {{ page-break-after: always; }}
+            .sign-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; }}
+            .sign-box {{ border: 1px dashed #94a3b8; padding: 15px; border-radius: 6px; min-height: 90px; }}
+            .no-print {{ text-align: right; margin-bottom: 20px; }}
+            .btn-print {{ background: #0284c7; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; }}
+            .btn-print:hover {{ background: #0369a1; }}
+            @media (max-width: 768px) {{
+                body {{ padding: 12px; font-size: 12px; }}
+                .sign-grid {{ grid-template-columns: 1fr; gap: 15px; }}
+                table {{ display: block; overflow-x: auto; width: 100%; }}
+                h1 {{ font-size: 18px; }}
+                .header-box {{ flex-direction: column; }}
+            }}
+            @media print {{ .no-print {{ display: none !important; }} body {{ padding: 0; }} }}
         </style>
     </head>
     <body>
@@ -369,27 +369,27 @@ def generate_completude_html(session_id):
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dossier de Complétude DRAJES - Session {session['code_session']}</title>
         <style>
-            @page { size: A4; margin: 18mm 15mm; }
-            body { font-family: 'Segoe UI', Arial, sans-serif; color: #1e293b; line-height: 1.5; font-size: 13px; background: #fff; margin: 0; padding: 25px; }
-            .header-box { border-bottom: 3px solid #16a34a; padding-bottom: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; }
-            .of-title { font-size: 15px; font-weight: bold; color: #15803d; text-transform: uppercase; }
-            .badge-completude { background: #dcfce7; border: 1px solid #22c55e; color: #15803d; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 12px; }
-            h1 { font-size: 20px; color: #0f172a; margin: 15px 0 5px 0; text-align: center; text-transform: uppercase; }
-            .sub { text-align: center; color: #475569; font-size: 13px; margin-bottom: 25px; }
-            h2 { font-size: 14px; color: #16a34a; border-left: 4px solid #16a34a; padding-left: 10px; margin-top: 25px; margin-bottom: 10px; text-transform: uppercase; }
-            table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 12px; }
-            th, td { border: 1px solid #cbd5e1; padding: 7px 10px; text-align: left; }
-            th { background: #f8fafc; font-weight: 600; }
-            .box-audit { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 15px; margin: 20px 0; overflow-x: auto; }
-            .status-ok { color: #15803d; font-weight: bold; }
-            .btn-print { background: #16a34a; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; }
-            @media (max-width: 768px) {
-                body { padding: 12px; font-size: 12px; }
-                table { display: block; overflow-x: auto; width: 100%; }
-                h1 { font-size: 17px; }
-                .header-box { flex-direction: column; }
-            }
-            @media print { .no-print { display: none !important; } body { padding: 0; } }
+            @page {{ size: A4; margin: 18mm 15mm; }}
+            body {{ font-family: 'Segoe UI', Arial, sans-serif; color: #1e293b; line-height: 1.5; font-size: 13px; background: #fff; margin: 0; padding: 25px; }}
+            .header-box {{ border-bottom: 3px solid #16a34a; padding-bottom: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; }}
+            .of-title {{ font-size: 15px; font-weight: bold; color: #15803d; text-transform: uppercase; }}
+            .badge-completude {{ background: #dcfce7; border: 1px solid #22c55e; color: #15803d; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 12px; }}
+            h1 {{ font-size: 20px; color: #0f172a; margin: 15px 0 5px 0; text-align: center; text-transform: uppercase; }}
+            .sub {{ text-align: center; color: #475569; font-size: 13px; margin-bottom: 25px; }}
+            h2 {{ font-size: 14px; color: #16a34a; border-left: 4px solid #16a34a; padding-left: 10px; margin-top: 25px; margin-bottom: 10px; text-transform: uppercase; }}
+            table {{ width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 12px; }}
+            th, td {{ border: 1px solid #cbd5e1; padding: 7px 10px; text-align: left; }}
+            th {{ background: #f8fafc; font-weight: 600; }}
+            .box-audit {{ background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 15px; margin: 20px 0; overflow-x: auto; }}
+            .status-ok {{ color: #15803d; font-weight: bold; }}
+            .btn-print {{ background: #16a34a; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; }}
+            @media (max-width: 768px) {{
+                body {{ padding: 12px; font-size: 12px; }}
+                table {{ display: block; overflow-x: auto; width: 100%; }}
+                h1 {{ font-size: 17px; }}
+                .header-box {{ flex-direction: column; }}
+            }}
+            @media print {{ .no-print {{ display: none !important; }} body {{ padding: 0; }} }}
         </style>
     </head>
     <body>
@@ -588,24 +588,24 @@ def generate_ouverture_html(session_id, custom_data=None):
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dossier d'Ouverture de Promotion - {session['code_session']}</title>
         <style>
-            @page { size: A4; margin: 15mm; }
-            body { font-family: 'Segoe UI', Arial, sans-serif; color: #1e293b; line-height: 1.5; font-size: 13px; margin: 0; padding: 25px; }
-            .header-box { border-bottom: 3px solid #6366f1; padding-bottom: 12px; margin-bottom: 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-            h1 { color: #312e81; font-size: 18px; margin: 0 0 5px 0; text-transform: uppercase; }
-            h2 { color: #4338ca; font-size: 14px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; margin-top: 20px; }
-            table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px; }
-            th, td { border: 1px solid #cbd5e1; padding: 7px 10px; text-align: left; }
-            th { background: #f8fafc; font-weight: 600; color: #475569; }
-            .card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-top: 10px; }
-            .no-print { text-align: right; margin-bottom: 20px; }
-            .btn-print { background: #4338ca; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; }
-            @media (max-width: 768px) {
-                body { padding: 12px; font-size: 12px; }
-                table { display: block; overflow-x: auto; width: 100%; }
-                h1 { font-size: 16px; }
-                .header-box { flex-direction: column; }
-            }
-            @media print { .no-print { display: none !important; } body { padding: 0; } }
+            @page {{ size: A4; margin: 15mm; }}
+            body {{ font-family: 'Segoe UI', Arial, sans-serif; color: #1e293b; line-height: 1.5; font-size: 13px; margin: 0; padding: 25px; }}
+            .header-box {{ border-bottom: 3px solid #6366f1; padding-bottom: 12px; margin-bottom: 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }}
+            h1 {{ color: #312e81; font-size: 18px; margin: 0 0 5px 0; text-transform: uppercase; }}
+            h2 {{ color: #4338ca; font-size: 14px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; margin-top: 20px; }}
+            table {{ width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px; }}
+            th, td {{ border: 1px solid #cbd5e1; padding: 7px 10px; text-align: left; }}
+            th {{ background: #f8fafc; font-weight: 600; color: #475569; }}
+            .card {{ background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-top: 10px; }}
+            .no-print {{ text-align: right; margin-bottom: 20px; }}
+            .btn-print {{ background: #4338ca; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; }}
+            @media (max-width: 768px) {{
+                body {{ padding: 12px; font-size: 12px; }}
+                table {{ display: block; overflow-x: auto; width: 100%; }}
+                h1 {{ font-size: 16px; }}
+                .header-box {{ flex-direction: column; }}
+            }}
+            @media print {{ .no-print {{ display: none !important; }} body {{ padding: 0; }} }}
         </style>
     </head>
     <body>

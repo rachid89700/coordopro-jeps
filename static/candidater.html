@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidature en Ligne — Formations JEPS (BPJEPS / CPJEPS / BAFA)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800">
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center text-white shadow-md">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-slate-900 text-base leading-tight">Espace Candidature en Ligne</h1>
+                    <p class="text-xs text-slate-500">Académie Formatrice JEPS & Animation Sportive</p>
+                </div>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Inscriptions Ouvertes
+            </span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-3xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <!-- Bannière Promo -->
+            <div class="bg-gradient-to-r from-sky-700 to-indigo-800 p-6 text-white">
+                <div class="inline-block bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold mb-2">
+                    Promotion 2026 / 2027
+                </div>
+                <h2 class="text-xl sm:text-2xl font-bold">Dossier d'Inscription & Pré-Sélection</h2>
+                <p class="text-xs sm:text-sm text-sky-100 mt-1 max-w-xl">
+                    Remplissez vos coordonnées, vos motivations et déposez votre CV. Votre dossier est analysé automatiquement et transmis directement à l'équipe pédagogique.
+                </p>
+            </div>
+
+            <!-- Formulaire -->
+            <form id="form-candidature" class="p-6 sm:p-8 space-y-6">
+                <!-- Identité -->
+                <div>
+                    <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-user text-sky-600"></i> Vos Coordonnées
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Prénom *</label>
+                            <input type="text" id="prenom" required placeholder="Ex : Thomas" class="w-full text-xs border border-slate-300 rounded-lg p-2.5 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Nom *</label>
+                            <input type="text" id="nom" required placeholder="Ex : Dubois" class="w-full text-xs border border-slate-300 rounded-lg p-2.5 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Adresse Email *</label>
+                            <input type="email" id="email" required placeholder="thomas.dubois@email.fr" class="w-full text-xs border border-slate-300 rounded-lg p-2.5 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Numéro de Téléphone *</label>
+                            <input type="tel" id="telephone" required placeholder="06 12 34 56 78" class="w-full text-xs border border-slate-300 rounded-lg p-2.5 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 outline-none">
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-slate-100">
+
+                <!-- Choix Formation -->
+                <div>
+                    <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-award text-indigo-600"></i> Choix de la Formation Visée
+                    </h3>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Diplôme / Filière préparée *</label>
+                        <select id="diplome_vise" required class="w-full text-xs border border-slate-300 rounded-lg p-2.5 bg-slate-50 focus:border-sky-500 outline-none">
+                            <option value="BPJEPS MAPST (ex APT)">BPJEPS MAPST (Activités Physiques pour Tous)</option>
+                            <option value="BPJEPS APSF (ex AF)">BPJEPS APSF (Activités de la Forme - Cours Collectifs / Haltéro)</option>
+                            <option value="CPJEPS Animateur (AAVQ)">CPJEPS Animateur d'Activités et de Vie Quotidienne (AAVQ)</option>
+                            <option value="BPJEPS ASEC">BPJEPS Animation Sociale, Éducation & Citoyenneté (ASEC)</option>
+                            <option value="BAFA Complet">BAFA (Brevet d'Aptitude aux Fonctions d'Animateur)</option>
+                            <option value="BAFD Perfectionnement">BAFD (Brevet d'Aptitude aux Fonctions de Directeur)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <hr class="border-slate-100">
+
+                <!-- CV & Lettre de motivation -->
+                <div>
+                    <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-file-lines text-amber-600"></i> Expériences & Motivation
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Nom de votre fichier CV ou résumé de parcours *</label>
+                            <input type="text" id="cv_nom" required value="CV_Dubois_Thomas.pdf" class="w-full text-xs border border-slate-300 rounded-lg p-2.5 focus:border-sky-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Résumé de vos expériences dans le sport ou l'animation :</label>
+                            <textarea id="cv_texte" rows="3" placeholder="Ex : Animateur en centre de loisirs pendant 2 ans, titulaire du BAFA et du PSC1. Pratique du basket-ball en compétition..." class="w-full text-xs border border-slate-300 rounded-lg p-2.5 focus:border-sky-500 outline-none"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Lettre de motivation & Projet professionnel *</label>
+                            <textarea id="motivation_texte" rows="5" required placeholder="Expliquez votre projet : pourquoi souhaitez-vous devenir éducateur sportif / animateur ? Quelles sont vos ambitions professionnelles ? Avez-vous déjà une structure d'alternance pressentie (club, mairie, salle de fitness) ?" class="w-full text-xs border border-slate-300 rounded-lg p-2.5 focus:border-sky-500 outline-none"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soumission -->
+                <div class="pt-4 border-t border-slate-100">
+                    <button type="submit" id="btn-submit" class="w-full bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-paper-plane"></i> Envoyer ma Candidature Directement
+                    </button>
+                    <p class="text-[11px] text-center text-slate-400 mt-2">
+                        Vos données sont strictement protégées et traitées conformément au RGPD pour votre dossier d'admission.
+                    </p>
+                </div>
+            </form>
+
+            <!-- Écran de Succès -->
+            <div id="success-screen" class="hidden p-8 text-center space-y-4">
+                <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900">Candidature Enregistrée avec Succès !</h3>
+                <p class="text-xs text-slate-600 max-w-md mx-auto leading-relaxed">
+                    Votre dossier a été instantanément intégré dans la plateforme du coordonnateur pédagogique. Vous recevrez une convocation et un email de confirmation pour l'entretien d'admission.
+                </p>
+                <div id="score-badge" class="inline-block bg-sky-50 border border-sky-200 text-sky-800 text-xs px-4 py-2 rounded-xl font-medium mt-2"></div>
+                <div class="pt-4">
+                    <button onclick="window.location.reload()" class="text-xs text-indigo-600 hover:underline font-semibold">
+                        Déposer une autre candidature
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("form-candidature").onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById("btn-submit");
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Traitement du dossier en cours...';
+
+            const payload = {
+                prenom: document.getElementById("prenom").value,
+                nom: document.getElementById("nom").value,
+                email: document.getElementById("email").value,
+                telephone: document.getElementById("telephone").value,
+                diplome_vise: document.getElementById("diplome_vise").value,
+                cv_nom: document.getElementById("cv_nom").value,
+                cv_texte: document.getElementById("cv_texte").value,
+                motivation_texte: document.getElementById("motivation_texte").value
+            };
+
+            try {
+                const res = await fetch("/api/candidature/add", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById("form-candidature").classList.add("hidden");
+                    const sc = document.getElementById("success-screen");
+                    sc.classList.remove("hidden");
+                    document.getElementById("score-badge").innerHTML = `
+                        ✨ Score qualité d'admission calculé : <strong>${data.score}%</strong><br>
+                        <span class="text-[11px] text-slate-500">${data.analyse}</span>
+                    `;
+                } else {
+                    alert("Erreur lors de l'enregistrement de votre candidature.");
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Envoyer ma Candidature Directement';
+                }
+            } catch (err) {
+                alert("Erreur réseau : " + err.message);
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Envoyer ma Candidature Directement';
+            }
+        };
+    </script>
+</body>
+</html>

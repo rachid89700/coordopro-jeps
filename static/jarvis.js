@@ -586,23 +586,23 @@ Je l'enregistre ? <b>oui / non</b>`;
         btn.id = "jarvis-toggle";
         btn.title = "Assistant Jarvis";
         btn.setAttribute("aria-label", "Ouvrir l'assistant Jarvis");
-        btn.className = "fixed bottom-[30px] left-[30px] z-[90] w-14 h-14 rounded-full bg-gradient-to-br from-slate-900 to-indigo-700 text-white shadow-xl flex items-center justify-center hover:scale-105 transition";
-        btn.innerHTML = '<i class="fa-solid fa-robot text-xl"></i>';
+        btn.className = "fixed bottom-[18px] sm:bottom-[30px] left-[18px] sm:left-[30px] z-[90] w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-slate-900 to-indigo-700 text-white shadow-xl flex items-center justify-center hover:scale-105 transition";
+        btn.innerHTML = '<i class="fa-solid fa-robot text-lg sm:text-xl"></i>';
         btn.onclick = toggle;
 
         const panel = document.createElement("section");
         panel.id = "jarvis-panel";
         panel.setAttribute("role", "dialog");
         panel.setAttribute("aria-label", "Assistant Jarvis");
-        panel.className = "hidden fixed bottom-[100px] left-[30px] z-[95] w-[380px] max-w-[calc(100vw-40px)] h-[540px] max-h-[75vh] bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden";
+        panel.className = "hidden fixed bottom-[76px] sm:bottom-[100px] left-[10px] sm:left-[30px] right-[10px] sm:right-auto z-[95] w-auto sm:w-[380px] max-w-full sm:max-w-[calc(100vw-40px)] h-[80vh] sm:h-[540px] max-h-[82vh] sm:max-h-[75vh] bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden";
         panel.innerHTML = `
             <header class="px-4 py-3 bg-gradient-to-r from-slate-900 to-indigo-700 text-white flex items-center justify-between">
                 <div class="flex items-center gap-2"><i class="fa-solid fa-robot"></i>
                     <div><div class="font-bold text-sm">Jarvis</div><div class="text-[10px] text-indigo-200">Assistant du coordonnateur · 100 % local</div></div></div>
-                <button id="jarvis-close" aria-label="Fermer" class="text-white/70 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+                <button id="jarvis-close" aria-label="Fermer" class="text-white/70 hover:text-white p-1"><i class="fa-solid fa-xmark text-base"></i></button>
             </header>
             <div id="jarvis-log" class="flex-1 overflow-y-auto p-3 space-y-2 bg-slate-50 text-xs" aria-live="polite"></div>
-            <div id="jarvis-chips" class="px-3 pt-2 flex flex-wrap gap-1.5 bg-white"></div>
+            <div id="jarvis-chips" class="px-3 pt-2 flex flex-wrap gap-1.5 bg-white max-h-[90px] overflow-y-auto"></div>
             <form id="jarvis-form" class="p-3 flex items-center gap-2 bg-white border-t border-slate-100">
                 <button type="button" id="jarvis-mic" title="Dicter (Chrome/Edge)" aria-label="Dicter" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600"><i class="fa-solid fa-microphone"></i></button>
                 <input id="jarvis-input" autocomplete="off" placeholder="Ex : ajoute Ibrahima le 9 octobre sur la méthodo…" class="flex-1 text-xs border border-slate-300 rounded-full px-3 py-2 outline-none focus:border-indigo-500">
